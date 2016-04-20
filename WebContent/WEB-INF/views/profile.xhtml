@@ -5,9 +5,15 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<script src="/Comp303FinalProject/scripts/main.js"></script>
+	<script src="/Comp303FinalProject/scripts/profile.js"></script>
 </h:head>
 <body>
+<nav>
+<ul>
+<li>Profile</li>
+<li>Store</li>
+</ul>
+</nav>
 	<p>Welcome back!</p>
 	<div>
 		<h4>Profile settings</h4>
@@ -15,14 +21,23 @@
 			<label>Username: ${userBean.username}</label>
 		</p>
 		<p class="name">
-			Name: <span>${userBean.name}</span>
-			<br /> <input type="text" />
+			Name: <span>${userBean.name}</span> <br /> <input type="text" />
 			<button>Change</button>
-		</p>		
+		</p>
 	</div>
 	<div>
-	<h4>Your order history:</h4>
-	
+		<h4>Your order history:</h4>
+		<ui:repeat var="orderBean" value="#{orderBeanList}">
+			<p>
+				<label><strong>Date:</strong> #{orderBean.date}</label> <label><strong>Cost:</strong>
+					#{orderBean.cost}</label> <br />
+					<ui:repeat var="entry" value="#{orderBean.products}">
+						<label>#{entry.key}: #{entry.value}</label>
+						<br />
+					</ui:repeat>
+				<button>Cancel this order</button>
+			</p>
+		</ui:repeat>
 	</div>
 </body>
 </html>

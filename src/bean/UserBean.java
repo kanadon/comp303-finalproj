@@ -11,7 +11,6 @@ import model.User;
 @SessionScoped
 public class UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	// static UserBean ub = new UserBean();
 
 	public UserBean() {
 	}
