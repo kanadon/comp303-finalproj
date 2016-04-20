@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<script src="/Comp303FinalProject/scripts/main.js"></script>
+</h:head>
+<body>
+	<p>Welcome back!</p>
+	<div>
+		<h4>Profile settings</h4>
+		<p>
+			<label>Username: ${userBean.username}</label>
+		</p>
+		<p class="name">
+			Name: <span>${userBean.name}</span>
+			<br /> <input type="text" />
+			<button>Change</button>
+		</p>		
+	</div>
+	<div>
+	<h4>Your order history:</h4>
+	
+	</div>
+</body>
+</html>
