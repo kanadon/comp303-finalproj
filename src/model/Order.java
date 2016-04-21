@@ -27,6 +27,7 @@ public class Order {
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name="userId", referencedColumnName="userId")
 	private User user;
+	private int uid;
 	
 	
 	public OrderId getOrderId(){
@@ -49,20 +50,10 @@ public class Order {
 	public void setUser(User user){
 		this.user = user;
 	}
-
-//	public int getUserId() {
-//		return userId();
-//	}
-//
-//	public void setUserId(int userId) {
-//		this.userId = userId;
-//	}
-//
-//	public Timestamp getDate() {
-//		return date;
-//	}
-//
-//	public void setDate(Timestamp date) {
-//		this.date = date;
-//	}	
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
 }

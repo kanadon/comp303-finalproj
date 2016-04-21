@@ -5,15 +5,16 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+	<link rel="stylesheet" href="/Comp303FinalProject/styles/main.css"></link>
 	<script src="/Comp303FinalProject/scripts/profile.js"></script>
 </h:head>
 <body>
-<nav>
-<ul>
-<li>Profile</li>
-<li>Store</li>
-</ul>
-</nav>
+	<nav>
+	<ul>
+		<li><a href="/Comp303FinalProject/Profile">Profile</a></li>
+		<li><a href="/Comp303FinalProject/Store">Store</a></li>
+	</ul>
+	</nav>
 	<p>Welcome back!</p>
 	<div>
 		<h4>Profile settings</h4>
@@ -25,17 +26,20 @@
 			<button>Change</button>
 		</p>
 	</div>
-	<div>
+	<div class="orders">
 		<h4>Your order history:</h4>
-		<ui:repeat var="orderBean" value="#{orderBeanList}">
-			<p>
-				<label><strong>Date:</strong> #{orderBean.date}</label> <label><strong>Cost:</strong>
-					#{orderBean.cost}</label> <br />
-					<ui:repeat var="entry" value="#{orderBean.products}">
-						<label>#{entry.key}: #{entry.value}</label>
-						<br />
-					</ui:repeat>
-				<button>Cancel this order</button>
+		<ui:repeat var="orderBean" value="#{orderBeans}">
+			<p data-id="#{orderBean.uid}">
+				<label><strong>Date:</strong> <h:outputText
+						value="#{orderBean.date}" converter="myDateTimeConverter" /></label> <label><strong>Cost:</strong>
+					<h:outputText value="#{orderBean.cost}">
+						<f:convertNumber type="currency" />
+					</h:outputText></label> <br />
+				<ui:repeat var="entry" value="#{orderBean.products}">
+					<label>#{entry.key}: #{entry.value}</label>
+					<br />
+				</ui:repeat>
+				<button data-id="#{orderBean.uid}" class="cancel">Cancel this order</button>
 			</p>
 		</ui:repeat>
 	</div>

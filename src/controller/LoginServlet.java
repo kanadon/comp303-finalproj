@@ -2,9 +2,13 @@ package controller;
 
 import java.io.IOException;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,26 +23,45 @@ import model.User;
 @WebServlet({ "/LoginServlet", "/Login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    public LoginServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.xhtml");
 		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");		
-		User user = DBHelper.authenticate(username, password);
-		
+		String password = request.getParameter("password");
 		UserBean userBean = new UserBean();
-		userBean.setUserId(user.getUserId());
-		userBean.setUsername(user.getUsername());
-		userBean.setName(user.getName());
-		request.getSession().setAttribute("userBean", userBean);
-		response.sendRedirect("/Comp303FinalProject/Profile");
+		;
+		User user;
+		EntityManagerFactory ef = Persistence.createEntityManagerFactory("FinalProject");
+		EntityManager em = ef.createEntityManager();
+		Query q = em.createQuery("SELECT u FROM User AS u WHERE u.username = '" + username + "' AND u.password = '" + password +"'");
+		q.setFirstResult(0);
+
+		try {
+			user = (User) q.getSingleResult();
+			userBean.setUserId(user.getUserId());
+			userBean.setUsername(user.getUsername());
+			userBean.setName(user.getName());
+			userBean.setAuthenticated(true);
+			request.getSession().setAttribute("userBean", userBean);
+
+			response.setContentType("application/json");
+			JsonObject json = Json.createObjectBuilder().add("error", false)
+					.add("redirect", "/Comp303FinalProject/Profile").build();
+			response.getWriter().write(json.toString());
+
+//			response.sendRedirect("/Comp303FinalProject/Profile");
+		} catch (NoResultException nre) {
+			userBean.setAuthenticated(false);
+		}
 	}
 }

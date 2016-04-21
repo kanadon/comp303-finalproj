@@ -43,6 +43,7 @@ public class ProfileServlet extends HttpServlet {
 			int cost = 0;
 			OrderBean ob = new OrderBean();
 			ob.setDate(o.getOrderId().getDate());
+			ob.setUid(o.getUid());
 			
 			for(OrderProduct op : o.getOrderProducts()){
 				ob.getProducts().add(new AbstractMap.SimpleEntry<String, Integer>(op.getProduct().getName(), op.getQuantity()));
@@ -53,7 +54,7 @@ public class ProfileServlet extends HttpServlet {
 			orderBeans.add(ob);
 		}
 		
-		request.getSession().setAttribute("orderBeanList", orderBeans);
+		request.getSession().setAttribute("orderBeans", orderBeans);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profile.xhtml");
 		rd.forward(request, response);
 	}

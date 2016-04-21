@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 import model.User;
 
 @ManagedBean(name = "userBean")
-@SessionScoped
+//@SessionScoped
 public class UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,6 +18,7 @@ public class UserBean implements Serializable {
 	private int userId;
 	private String username;
 	private String name;
+	private boolean authenticated;
 
 	public String getUsername() {
 		return username;
@@ -42,5 +43,13 @@ public class UserBean implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public boolean getAuthenticated() {
+		return authenticated;
+	}
+
+	public void setAuthenticated(boolean authenticated) {
+		this.authenticated = authenticated;
 	}
 }
