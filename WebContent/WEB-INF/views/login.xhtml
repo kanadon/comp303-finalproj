@@ -5,15 +5,17 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-<script src="/Comp303FinalProject/scripts/login.js"></script>
+	<link rel="stylesheet" href="/Comp303FinalProject/styles/main.css"></link>
+	<script src="/Comp303FinalProject/scripts/login.js"></script>
 </h:head>
 <body>
-	
+	<h4>Sign in</h4>
 	<form action="/Comp303FinalProject/Login" method="post">
 		<label for="username">Username:</label> <input type="text"
 			name="username" /> <label for="password">Password:</label> <input
 			type="password" name="password" />
 		<button>Login</button>
+		<p class="error">Wrong credentials</p>
 	</form>
 </body>
 </html>

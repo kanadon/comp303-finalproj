@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.UserBean;
-import helpers.DBHelper;
 import model.User;
 
 @WebServlet({ "/LoginServlet", "/Login" })
@@ -62,6 +61,9 @@ public class LoginServlet extends HttpServlet {
 //			response.sendRedirect("/Comp303FinalProject/Profile");
 		} catch (NoResultException nre) {
 			userBean.setAuthenticated(false);
+			response.setContentType("application/json");
+			JsonObject json = Json.createObjectBuilder().add("error", true).build();
+			response.getWriter().write(json.toString());
 		}
 	}
 }

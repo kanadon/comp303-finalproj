@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<link rel="stylesheet" href="/Comp303FinalProject/styles/main.css"></link>
+	<script src="/Comp303FinalProject/scripts/store.js"></script>
+</h:head>
+<body>
+	<nav>
+	<ul>
+		<li><a href="/Comp303FinalProject/Profile">Profile</a></li>
+		<li><a href="/Comp303FinalProject/Store">Store</a></li>
+	</ul>
+	</nav>
+	<form action="/Comp303FinalProject/PlaceOrder" method="post">
+		<ui:repeat var="product" value="#{productList}">
+			<p>
+				<img
+					src="/Comp303FinalProject/images/product-#{product.productId}.jpg" />
+				<br /> <label>#{product.name}</label> <label> <h:outputText
+						value="#{product.price}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</label> <input name="#{product.productId}" type="text" value="0" />
+			</p>
+		</ui:repeat>
+		<button>Place order</button>
+	</form>
+</body>
+</html>

@@ -5,10 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import model.User;
-
 @ManagedBean(name = "userBean")
-//@SessionScoped
+@SessionScoped
 public class UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
